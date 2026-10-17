@@ -1,0 +1,52 @@
+<html>
+<body style="background-color: #f4f4f9; font-family: Arial, sans-serif; padding: 20px;">
+
+<h3 style="margin-top: 0; color: #1a252f; border-bottom: 2px solid #1a252f; padding-bottom: 10px;">
+Tambah Data Mahasiswa
+</h3>
+
+<form id="formMahasiswa">
+
+<!-- Grup Input NIM -->
+<div style="margin-bottom: 15px;">
+<label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">NIM:</label>
+<input type="text"
+id="nim"
+placeholder="Masukkan NIM"
+style="width: 100%; padding: 10px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; transition: 0.3s;">
+<small id="errorNim" style="color: red; display: none;">NIM harus diisi!</small>
+</div>
+
+<!-- Grup Input Nama -->
+<div style="margin-bottom: 15px;">
+<label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">
+Nama Lengkap:
+</label>
+<input type="text"
+id="nama"
+placeholder="Masukkan Nama"
+style="width: 100%; padding: 10px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; transition: 0.3s;">
+<small id="errorNama" style="color: red; display: none;">Nama harus diisi!</small>
+</div>
+
+<!-- Grup Pilihan Mata Kuliah -->
+<div style="margin-bottom: 20px;">
+<label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Mata Kuliah:</label>
+<select id="matkul"
+style="width: 100%; padding: 10px; border: 1px solid #dddddd; border-radius: 4px; background-color: #fff; box-sizing: border-box; transition: 0.3s;">
+<option value="">Pilih Mata Kuliah</option>
+<option value="Pemrograman Web">Pemrograman Web</option>
+<option value="Basis Data">Basis Data</option>
+<option value="Desain UI/UX">Desain UI/UX</option>
+</select>
+</div>
+
+<!-- Tombol Simpan -->
+<button type="submit" id="btnSimpan" style="width: 100%; background-color: #1a252f; color: white; padding: 12px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: 0.3s;">
+Simpan Data
+</button>
+
+</form>
+
+</body>
+</html>

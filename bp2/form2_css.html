@@ -1,0 +1,202 @@
+<html>
+<body style="background-color: #f4f4f9; font-family: Arial, sans-serif; padding: 20px;">
+
+<h3 style="margin-top: 0; color: #1a252f; border-bottom: 2px solid #1a252f; padding-bottom: 10px;">
+Tambah Data Mahasiswa
+</h3>
+
+<form id="formMahasiswa">
+
+<!-- Grup Input NIM -->
+<div style="margin-bottom: 15px;">
+<label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">NIM:</label>
+<input type="text"
+id="nim"
+placeholder="Masukkan NIM"
+style="width: 100%; padding: 10px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; transition: 0.3s;">
+<small id="errorNim" style="color: red; display: none;">NIM harus diisi!</small>
+</div>
+
+<!-- Grup Input Nama -->
+<div style="margin-bottom: 15px;">
+<label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">
+Nama Lengkap:
+</label>
+<input type="text"
+id="nama"
+placeholder="Masukkan Nama"
+style="width: 100%; padding: 10px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; transition: 0.3s;">
+<small id="errorNama" style="color: red; display: none;">Nama harus diisi!</small>
+</div>
+
+<!-- Grup Pilihan Mata Kuliah -->
+<div style="margin-bottom: 20px;">
+<label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Mata Kuliah:</label>
+<select id="matkul"
+style="width: 100%; padding: 10px; border: 1px solid #dddddd; border-radius: 4px; background-color: #fff; box-sizing: border-box; transition: 0.3s;">
+<option value="">Pilih Mata Kuliah</option>
+<option value="Pemrograman Web">Pemrograman Web</option>
+<option value="Basis Data">Basis Data</option>
+<option value="Desain UI/UX">Desain UI/UX</option>
+</select>
+<small id="errorMatkul" style="color: red; display: none; margin-top: 5px;">Mata kuliah harus dipilih!</small>
+</div>
+
+<!-- Tombol Simpan -->
+<button type="submit" id="btnSimpan" style="width: 100%; background-color: #1a252f; color: white; padding: 12px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: 0.3s;">
+Simpan Data
+</button>
+
+</form>
+
+<!-- Area Output Hasil Simpan Data -->
+<div id="outputData" style="margin-top: 20px; padding: 15px; background: #fff; border-radius: 4px; display: none; border: 1px solid #ccc;">
+    <h4 style="margin-top: 0; color: #1a252f;">Data Berhasil Disimpan:</h4>
+    <p id="outNim"></p>
+    <p id="outNama"></p>
+    <p id="outMatkul"></p>
+</div>
+
+<script>
+const form = document.getElementById("formMahasiswa");
+const tombol = document.getElementById("btnSimpan");
+const inputNim = document.getElementById("nim");
+const inputNama = document.getElementById("nama");
+const selectMatkul = document.getElementById("matkul");
+
+const errorNim = document.getElementById("errorNim");
+const errorNama = document.getElementById("errorNama");
+const errorMatkul = document.getElementById("errorMatkul");
+
+const outputData = document.getElementById("outputData");
+const outNim = document.getElementById("outNim");
+const outNama = document.getElementById("outNama");
+const outMatkul = document.getElementById("outMatkul");
+
+// 1. Hover Tombol (Berubah jadi biru dan sedikit membesar)[cite: 8]
+tombol.addEventListener("mouseover", function() {
+    tombol.style.backgroundColor = "#2980b9";
+    tombol.style.transform = "scale(1.02)";
+});
+tombol.addEventListener("mouseout", function() {
+    tombol.style.backgroundColor = "#1a252f";
+    tombol.style.transform = "scale(1)";
+});
+
+// 2. Focus Input (Border biru, efek glow kuning)[cite: 8]
+function setFocusStyle(element) {
+    element.style.border = "2px solid #3498db";
+    element.style.outline = "none";
+    element.style.boxShadow = "0 0 8px yellow";
+}
+
+function setBlurStyle(element) {
+    element.style.outline = "";
+    element.style.boxShadow = "none";
+}
+
+inputNim.addEventListener("focus", function() { setFocusStyle(inputNim); });
+inputNim.addEventListener("blur", function() { 
+    setBlurStyle(inputNim);
+    // 4. Border Validasi (Merah jika kosong, Hijau jika terisi)[cite: 8]
+    if(inputNim.value.trim() === "") {
+        inputNim.style.border = "1px solid red";
+    } else {
+        inputNim.style.border = "1px solid green";
+    }
+});
+
+inputNama.addEventListener("focus", function() { setFocusStyle(inputNama); });
+inputNama.addEventListener("blur", function() { 
+    setBlurStyle(inputNama);
+    if(inputNama.value.trim() === "") {
+        inputNama.style.border = "1px solid red";
+    } else {
+        inputNama.style.border = "1px solid green";
+    }
+});
+
+selectMatkul.addEventListener("focus", function() { setFocusStyle(selectMatkul); });
+selectMatkul.addEventListener("blur", function() { 
+    setBlurStyle(selectMatkul);
+    if(selectMatkul.value === "") {
+        selectMatkul.style.border = "1px solid red";
+    } else {
+        selectMatkul.style.border = "1px solid green";
+    }
+});
+
+// 6. Mengisi nama -> background berubah menjadi biru muda[cite: 8]
+inputNama.addEventListener("input", function() {
+    if (inputNama.value.length > 0) {
+        inputNama.style.backgroundColor = "#eef9ff";
+    } else {
+        inputNama.style.backgroundColor = "white";
+    }
+});
+
+// 7. Memilih mata kuliah -> background berubah hijau setelah memilih[cite: 8]
+selectMatkul.addEventListener("change", function() {
+    if (selectMatkul.value !== "") {
+        selectMatkul.style.backgroundColor = "#e8f8f5"; // hijau muda
+    } else {
+        selectMatkul.style.backgroundColor = "white";
+    }
+});
+
+// 3, 4, 5, & 8. Validasi Form, Alert/Output, dan Reset Form Isian[cite: 8]
+form.addEventListener("submit", function(event) {
+    event.preventDefault(); // Mencegah reload halaman
+
+    let isValid = true;
+
+    // Validasi NIM
+    if (inputNim.value.trim() === "") {
+        errorNim.style.display = "block";
+        inputNim.style.border = "1px solid red";
+        isValid = false;
+    } else {
+        errorNim.style.display = "none";
+    }
+
+    // Validasi Nama
+    if (inputNama.value.trim() === "") {
+        errorNama.style.display = "block";
+        inputNama.style.border = "1px solid red";
+        isValid = false;
+    } else {
+        errorNama.style.display = "none";
+    }
+
+    // Validasi Mata Kuliah
+    if (selectMatkul.value === "") {
+        errorMatkul.style.display = "block";
+        selectMatkul.style.border = "1px solid red";
+        isValid = false;
+    } else {
+        errorMatkul.style.display = "none";
+    }
+
+    // Jika semua data sudah valid (terisi)
+    if (isValid) {
+        // 5. Menampilkan Data / Output setelah berhasil disimpan[cite: 8]
+        outNim.textContent = "NIM: " + inputNim.value;
+        outNama.textContent = "Nama Lengkap: " + inputNama.value;
+        outMatkul.textContent = "Mata Kuliah: " + selectMatkul.value;
+        outputData.style.display = "block";
+
+        alert("Data mahasiswa berhasil disimpan!");
+
+        // 8. Form Isian reset setelah data berhasil disimpan[cite: 8]
+        form.reset();
+        inputNama.style.backgroundColor = "white";
+        selectMatkul.style.backgroundColor = "white";
+        inputNim.style.border = "1px solid #dddddd";
+        inputNama.style.border = "1px solid #dddddd";
+        selectMatkul.style.border = "1px solid #dddddd";
+    }
+});
+</script>
+
+</body>
+</html>
